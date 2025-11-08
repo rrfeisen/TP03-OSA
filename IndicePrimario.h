@@ -3,6 +3,8 @@
 
 #include <fstream>
 
+using namespace std;
+
 class IndicePrimario {
 private:
     int matricula;
@@ -21,8 +23,8 @@ public:
     void setByteOffset(long offset);
     
     // Serialização
-    void serializar(std::ofstream& out) const;
-    void desserializar(std::ifstream& in);
+    void serializar(ostream& out) const;
+    void desserializar(istream& in);
     
     // Operador de comparação para ordenação
     bool operator<(const IndicePrimario& outro) const;
