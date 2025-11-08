@@ -1,0 +1,49 @@
+#ifndef INDICE_SECUNDARIO_H
+#define INDICE_SECUNDARIO_H
+
+#include <string>
+#include <fstream>
+
+// Estrutura de um nó da lista invertida
+class NoListaInvertida {
+private:
+    int matricula;
+    long proximo_rrn; // RRN do próximo nó (-1 se for o último)
+
+public:
+    NoListaInvertida();
+    NoListaInvertida(int mat, long prox);
+    
+    int getMatricula() const;
+    long getProximoRRN() const;
+    
+    void setMatricula(int mat);
+    void setProximoRRN(long prox);
+    
+    void serializar(std::ofstream& out) const;
+    void desserializar(std::ifstream& in);
+    
+    static size_t tamanhoRegistro();
+};
+
+// Índice secundário que aponta para o início da lista invertida
+class IndiceSecundario {
+private:
+    char curso[50];
+    long primeiro_rrn; // RRN do primeiro nó da lista invertida
+
+public:
+    IndiceSecundario();
+    IndiceSecundario(const std::string& cur, long rrn);
+    
+    std::string getCurso() const;
+    long getPrimeiroRRN() const;
+    
+    void setCurso(const std::string& cur);
+    void setPrimeiroRRN(long rrn);
+    
+    void serializar(std::ofstream& out) const;
+    void desserializar(std::ifstream& in);
+};
+
+#endif

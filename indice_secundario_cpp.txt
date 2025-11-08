@@ -1,0 +1,66 @@
+#include "IndiceSecundario.h"
+#include <cstring>
+
+// Implementação de NoListaInvertida
+NoListaInvertida::NoListaInvertida() : matricula(0), proximo_rrn(-1) {}
+
+NoListaInvertida::NoListaInvertida(int mat, long prox) 
+    : matricula(mat), proximo_rrn(prox) {}
+
+int NoListaInvertida::getMatricula() const { return matricula; }
+long NoListaInvertida::getProximoRRN() const { return proximo_rrn; }
+
+void NoListaInvertida::setMatricula(int mat) { matricula = mat; }
+void NoListaInvertida::setProximoRRN(long prox) { proximo_rrn = prox; }
+
+void NoListaInvertida::serializar(std::ofstream& out) const {
+    out.write(reinterpret_cast<const char*>(&matricula), sizeof(matricula));
+    out.write(reinterpret_cast<const char*>(&proximo_rrn), sizeof(proximo_rrn));
+}
+
+void NoListaInvertida::desserializar(std::ifstream& in) {
+    in.read(reinterpret_cast<char*>(&matricula), sizeof(matricula));
+    in.read(reinterpret_cast<char*>(&proximo_rrn), sizeof(proximo_rrn));
+}
+
+size_t NoListaInvertida::tamanhoRegistro() {
+    return sizeof(int) + sizeof(long);
+}
+
+// Implementação de IndiceSecundario
+IndiceSecundario::IndiceSecundario() : primeiro_rrn(-1) {
+    memset(curso, 0, sizeof(curso));
+}
+
+IndiceSecundario::IndiceSecundario(const std::string& cur, long rrn) 
+    : primeiro_rrn(rrn) {
+    memset(curso, 0, sizeof(curso));
+    strncpy(curso, cur.c_str(), sizeof(curso) - 1);
+}
+
+std::string IndiceSecundario::getCurso() const { 
+    return std::string(curso); 
+}
+
+long IndiceSecundario::getPrimeiroRRN() const { 
+    return primeiro_rrn; 
+}
+
+void IndiceSecundario::setCurso(const std::string& cur) {
+    memset(curso, 0, sizeof(curso));
+    strncpy(curso, cur.c_str(), sizeof(curso) - 1);
+}
+
+void IndiceSecundario::setPrimeiroRRN(long rrn) { 
+    primeiro_rrn = rrn; 
+}
+
+void IndiceSecundario::serializar(std::ofstream& out) const {
+    out.write(curso, sizeof(curso));
+    out.write(reinterpret_cast<const char*>(&primeiro_rrn), sizeof(primeiro_rrn));
+}
+
+void IndiceSecundario::desserializar(std::ifstream& in) {
+    in.read(curso, sizeof(curso));
+    in.read(reinterpret_cast<char*>(&primeiro_rrn), sizeof(primeiro_rrn));
+}

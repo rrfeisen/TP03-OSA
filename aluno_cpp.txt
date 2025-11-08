@@ -1,0 +1,59 @@
+#include "Aluno.h"
+#include <cstring>
+#include <iostream>
+#include <iomanip>
+
+Aluno::Aluno() : matricula(0), coeficiente(0.0f) {
+    memset(nome, 0, sizeof(nome));
+    memset(curso, 0, sizeof(curso));
+}
+
+Aluno::Aluno(int mat, const std::string& nom, const std::string& cur, float coef) 
+    : matricula(mat), coeficiente(coef) {
+    memset(nome, 0, sizeof(nome));
+    memset(curso, 0, sizeof(curso));
+    strncpy(nome, nom.c_str(), sizeof(nome) - 1);
+    strncpy(curso, cur.c_str(), sizeof(curso) - 1);
+}
+
+int Aluno::getMatricula() const { return matricula; }
+std::string Aluno::getNome() const { return std::string(nome); }
+std::string Aluno::getCurso() const { return std::string(curso); }
+float Aluno::getCoeficiente() const { return coeficiente; }
+
+void Aluno::setMatricula(int mat) { matricula = mat; }
+void Aluno::setNome(const std::string& nom) {
+    memset(nome, 0, sizeof(nome));
+    strncpy(nome, nom.c_str(), sizeof(nome) - 1);
+}
+void Aluno::setCurso(const std::string& cur) {
+    memset(curso, 0, sizeof(curso));
+    strncpy(curso, cur.c_str(), sizeof(curso) - 1);
+}
+void Aluno::setCoeficiente(float coef) { coeficiente = coef; }
+
+void Aluno::serializar(std::ofstream& out) const {
+    out.write(reinterpret_cast<const char*>(&matricula), sizeof(matricula));
+    out.write(nome, sizeof(nome));
+    out.write(curso, sizeof(curso));
+    out.write(reinterpret_cast<const char*>(&coeficiente), sizeof(coeficiente));
+}
+
+void Aluno::desserializar(std::ifstream& in) {
+    in.read(reinterpret_cast<char*>(&matricula), sizeof(matricula));
+    in.read(nome, sizeof(nome));
+    in.read(curso, sizeof(curso));
+    in.read(reinterpret_cast<char*>(&coeficiente), sizeof(coeficiente));
+}
+
+size_t Aluno::tamanhoRegistro() {
+    return sizeof(int) + 100 + 50 + sizeof(float);
+}
+
+void Aluno::exibir() const {
+    std::cout << "Matrícula: " << matricula << std::endl;
+    std::cout << "Nome: " << nome << std::endl;
+    std::cout << "Curso: " << curso << std::endl;
+    std::cout << "Coeficiente: " << std::fixed << std::setprecision(2) 
+              << coeficiente << std::endl;
+}

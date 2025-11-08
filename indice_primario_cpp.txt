@@ -1,0 +1,26 @@
+#include "IndicePrimario.h"
+
+IndicePrimario::IndicePrimario() : matricula(0), byte_offset(0) {}
+
+IndicePrimario::IndicePrimario(int mat, long offset) 
+    : matricula(mat), byte_offset(offset) {}
+
+int IndicePrimario::getMatricula() const { return matricula; }
+long IndicePrimario::getByteOffset() const { return byte_offset; }
+
+void IndicePrimario::setMatricula(int mat) { matricula = mat; }
+void IndicePrimario::setByteOffset(long offset) { byte_offset = offset; }
+
+void IndicePrimario::serializar(std::ofstream& out) const {
+    out.write(reinterpret_cast<const char*>(&matricula), sizeof(matricula));
+    out.write(reinterpret_cast<const char*>(&byte_offset), sizeof(byte_offset));
+}
+
+void IndicePrimario::desserializar(std::ifstream& in) {
+    in.read(reinterpret_cast<char*>(&matricula), sizeof(matricula));
+    in.read(reinterpret_cast<char*>(&byte_offset), sizeof(byte_offset));
+}
+
+bool IndicePrimario::operator<(const IndicePrimario& outro) const {
+    return matricula < outro.matricula;
+}

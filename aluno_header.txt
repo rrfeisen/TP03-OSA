@@ -1,0 +1,41 @@
+#ifndef ALUNO_H
+#define ALUNO_H
+
+#include <string>
+#include <fstream>
+
+class Aluno {
+private:
+    int matricula;
+    char nome[100];
+    char curso[50];
+    float coeficiente;
+
+public:
+    Aluno();
+    Aluno(int mat, const std::string& nom, const std::string& cur, float coef);
+    
+    // Getters
+    int getMatricula() const;
+    std::string getNome() const;
+    std::string getCurso() const;
+    float getCoeficiente() const;
+    
+    // Setters
+    void setMatricula(int mat);
+    void setNome(const std::string& nom);
+    void setCurso(const std::string& cur);
+    void setCoeficiente(float coef);
+    
+    // Serialização
+    void serializar(std::ofstream& out) const;
+    void desserializar(std::ifstream& in);
+    
+    // Tamanho fixo do registro
+    static size_t tamanhoRegistro();
+    
+    // Exibição
+    void exibir() const;
+};
+
+#endif

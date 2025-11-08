@@ -1,0 +1,16 @@
+matricula,nome,curso,coeficiente
+2021001,Ana Silva Santos,Ciência da Computação,8.5
+2021002,Bruno Oliveira Costa,Engenharia de Software,7.8
+2021003,Carla Mendes Ferreira,Ciência da Computação,9.2
+2021004,Daniel Souza Lima,Sistemas de Informação,8.0
+2021005,Eduarda Alves Pereira,Ciência da Computação,8.7
+2021006,Felipe Ribeiro Martins,Engenharia de Software,7.5
+2021007,Gabriela Santos Rocha,Sistemas de Informação,9.0
+2021008,Henrique Lima Cardoso,Ciência da Computação,8.3
+2021009,Isabela Costa Freitas,Engenharia de Software,8.9
+2021010,João Pedro Araújo,Ciência da Computação,7.6
+2021011,Larissa Ferreira Dias,Sistemas de Informação,8.4
+2021012,Matheus Barbosa Silva,Ciência da Computação,9.1
+2021013,Natália Rodrigues Souza,Engenharia de Software,8.2
+2021014,Otávio Gomes Castro,Sistemas de Informação,7.9
+2021015,Paula Martins Oliveira,Ciência da Computação,8.8
