@@ -1,6 +1,8 @@
 #include "IndiceSecundario.h"
 #include <cstring>
 
+using namespace std;
+
 // Implementação de NoListaInvertida
 NoListaInvertida::NoListaInvertida() : matricula(0), proximo_rrn(-1) {}
 
@@ -13,12 +15,12 @@ long NoListaInvertida::getProximoRRN() const { return proximo_rrn; }
 void NoListaInvertida::setMatricula(int mat) { matricula = mat; }
 void NoListaInvertida::setProximoRRN(long prox) { proximo_rrn = prox; }
 
-void NoListaInvertida::serializar(std::ofstream& out) const {
+void NoListaInvertida::serializar(ostream& out) const {
     out.write(reinterpret_cast<const char*>(&matricula), sizeof(matricula));
     out.write(reinterpret_cast<const char*>(&proximo_rrn), sizeof(proximo_rrn));
 }
 
-void NoListaInvertida::desserializar(std::ifstream& in) {
+void NoListaInvertida::desserializar(istream& in) {
     in.read(reinterpret_cast<char*>(&matricula), sizeof(matricula));
     in.read(reinterpret_cast<char*>(&proximo_rrn), sizeof(proximo_rrn));
 }
@@ -32,21 +34,21 @@ IndiceSecundario::IndiceSecundario() : primeiro_rrn(-1) {
     memset(curso, 0, sizeof(curso));
 }
 
-IndiceSecundario::IndiceSecundario(const std::string& cur, long rrn) 
+IndiceSecundario::IndiceSecundario(const string& cur, long rrn) 
     : primeiro_rrn(rrn) {
     memset(curso, 0, sizeof(curso));
     strncpy(curso, cur.c_str(), sizeof(curso) - 1);
 }
 
-std::string IndiceSecundario::getCurso() const { 
-    return std::string(curso); 
+string IndiceSecundario::getCurso() const { 
+    return string(curso); 
 }
 
 long IndiceSecundario::getPrimeiroRRN() const { 
     return primeiro_rrn; 
 }
 
-void IndiceSecundario::setCurso(const std::string& cur) {
+void IndiceSecundario::setCurso(const string& cur) {
     memset(curso, 0, sizeof(curso));
     strncpy(curso, cur.c_str(), sizeof(curso) - 1);
 }
@@ -55,12 +57,12 @@ void IndiceSecundario::setPrimeiroRRN(long rrn) {
     primeiro_rrn = rrn; 
 }
 
-void IndiceSecundario::serializar(std::ofstream& out) const {
+void IndiceSecundario::serializar(ostream& out) const {
     out.write(curso, sizeof(curso));
     out.write(reinterpret_cast<const char*>(&primeiro_rrn), sizeof(primeiro_rrn));
 }
 
-void IndiceSecundario::desserializar(std::ifstream& in) {
+void IndiceSecundario::desserializar(istream& in) {
     in.read(curso, sizeof(curso));
     in.read(reinterpret_cast<char*>(&primeiro_rrn), sizeof(primeiro_rrn));
 }
