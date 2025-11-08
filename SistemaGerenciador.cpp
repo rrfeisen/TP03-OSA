@@ -189,7 +189,7 @@ void SistemaGerenciador::_removerDoIndiceSecundario(int matricula, const std::st
         arquivo.seekg(rrn_atual * NoListaInvertida::tamanhoRegistro());
         
         NoListaInvertida no;
-        no.desserializar(arquivo);
+        no.desserializar((std::ifstream&)arquivo);
         
         if (no.getMatricula() == matricula) {
             // Encontrou o nó a remover
@@ -200,11 +200,11 @@ void SistemaGerenciador::_removerDoIndiceSecundario(int matricula, const std::st
                 // Não é o primeiro, atualizar o nó anterior
                 arquivo.seekg(rrn_anterior * NoListaInvertida::tamanhoRegistro());
                 NoListaInvertida no_anterior;
-                no_anterior.desserializar(arquivo);
+                no_anterior.desserializar((std::ifstream&)arquivo);
                 no_anterior.setProximoRRN(no.getProximoRRN());
                 
                 arquivo.seekp(rrn_anterior * NoListaInvertida::tamanhoRegistro());
-                no_anterior.serializar(arquivo);
+                no_anterior.serializar((std::ofstream&)arquivo);
             }
             break;
         }
@@ -262,7 +262,7 @@ void SistemaGerenciador::inserirAluno() {
         // Escrever no offset disponível
         std::fstream arquivo(arquivo_alunos, std::ios::binary | std::ios::in | std::ios::out);
         arquivo.seekp(offset);
-        aluno.serializar(arquivo);
+        aluno.serializar((std::ofstream&)arquivo);
         arquivo.close();
     } else {
         // Escrever no final do arquivo
