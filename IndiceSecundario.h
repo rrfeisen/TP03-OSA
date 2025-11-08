@@ -44,8 +44,8 @@ public:
     void setCurso(const string& cur);
     void setPrimeiroRRN(long rrn);
     
-    void serializar(ofstream& out) const;
-    void desserializar(ifstream& in);
+    void serializar(ostream& out) const;
+    void desserializar(istream& in);
 };
 
 #endif
